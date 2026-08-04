@@ -1,6 +1,14 @@
-<img src="banner.png" alt="Savoria Banner" width="100%">
+<p align="center">
+  <img src="banner.png" alt="Savoria – Full Stack Restaurant Management System" width="100%">
+</p>
 
-# 🚀 DecodeLabs Internship – Full Stack Development Projects
+<h1 align="center">🍽️ DecodeLabs Internship – Full Stack Development Projects</h1>
+
+<p align="center">
+A complete collection of projects developed during the <strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
+</p>
+
+<p align="center">
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)
@@ -10,33 +18,96 @@
 ![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-### 🍽️ Featured Project: Savoria – Fine Dining & Food Ordering Platform
-
-A complete collection of projects developed during the **DecodeLabs Full Stack Development Internship (Batch 2026)**.
-
-The repository demonstrates the complete journey of full stack web development—from building a responsive frontend to developing secure REST APIs, integrating MySQL databases, and implementing JWT-based authentication with role-based authorization.
-
-The final application, **Savoria**, combines all internship milestones into a modern restaurant management and online food ordering platform.
+</p>
 
 ---
 
 # 📖 Overview
 
-**Savoria** is a production-style Full Stack Restaurant Management System built using modern web technologies.
+This repository contains all projects completed during the **DecodeLabs Full Stack Development Internship**.
 
-The application includes:
+The internship follows a progressive learning path, beginning with frontend development and ending with a complete Full Stack Restaurant Management System featuring secure authentication, REST APIs, MySQL database integration, and role-based authorization.
 
-- 🍽️ Digital Restaurant Website
-- 📋 Interactive Food Menu
-- 🛒 Online Food Ordering
+The final application **Savoria** combines all internship milestones into a production-style web application.
+
+---
+
+# ✨ Main Features
+
+- 🍽️ Restaurant Website
+- 📋 Dynamic Food Menu
+- 🛒 Shopping Cart
 - 💳 Checkout System
 - 🪑 Table Reservation
 - 👤 Customer Dashboard
 - 👨‍💼 Admin Dashboard
 - 🔐 JWT Authentication
-- 🛡️ Role-Based Access Control
+- 🛡️ Role-Based Authorization
 - 📦 Order Management
-- 🗄️ MySQL Database Integration
+- 🗄️ MySQL Database
+- 📱 Fully Responsive Design
+
+---
+
+# 📸 Project Screenshots
+
+## 🏠 Home Page
+
+<img src="screenshots/home.png" width="100%">
+
+---
+
+## 🍽️ Menu Page
+
+<img src="screenshots/menu.png" width="100%">
+
+---
+
+## 🛒 Shopping Cart
+
+<img src="screenshots/cart.png" width="100%">
+
+---
+
+## 💳 Checkout
+
+<img src="screenshots/checkout.png" width="100%">
+
+---
+
+## 🪑 Table Reservation
+
+<img src="screenshots/reservation.png" width="100%">
+
+---
+
+## 🔐 Login Page
+
+<img src="screenshots/login.png" width="100%">
+
+---
+
+## 📝 Registration Page
+
+<img src="screenshots/register.png" width="100%">
+
+---
+
+## 👤 Customer Dashboard
+
+<img src="screenshots/customer-dashboard.png" width="100%">
+
+---
+
+## 👨‍💼 Admin Dashboard
+
+<img src="screenshots/admin-dashboard.png" width="100%">
+
+---
+
+## 📦 Order Management
+
+<img src="screenshots/orders.png" width="100%">
 
 ---
 
@@ -45,11 +116,22 @@ The application includes:
 ```text
 DecodeLabs-Internship
 │
-├── project-1-frontend-static
-├── project-2-backend-api-json
-├── project-3-database-integration
-├── project-4-auth-authorization
-├── full-stack-complete-app
+├── screenshots/
+│
+├── full-stack-complete-app/
+│
+├── project-1-frontend-static/
+│
+├── project-2-backend-api-json/
+│
+├── project-3-database-integration/
+│
+├── project-4-auth-authorization/
+│
+├── banner.png
+│
+├── LICENSE
+│
 └── README.md
 ```
 
@@ -57,37 +139,94 @@ DecodeLabs-Internship
 
 # 📌 Internship Projects
 
-| Project | Description |
-|---------|-------------|
-| 🌿 Project 1 | Responsive Frontend using HTML, CSS & JavaScript |
-| ⚙️ Project 2 | PHP REST API with JSON Storage |
-| 🗄️ Project 3 | MySQL Database Integration using PDO |
-| 🔐 Project 4 | JWT Authentication & Role-Based Authorization |
-| ⭐ Final Project | Complete Full Stack Restaurant Management System |
+## 🌿 Project 1 — Frontend Static
 
-Each project can be run independently and includes its own documentation.
+### Features
+
+- Responsive UI
+- HTML5
+- CSS3
+- JavaScript
+- Mobile Friendly
+- Interactive Components
+
+---
+
+## ⚙️ Project 2 — Backend API
+
+### Features
+
+- REST API
+- JSON Storage
+- CRUD Operations
+- Validation
+- HTTP Responses
+
+---
+
+## 🗄️ Project 3 — Database Integration
+
+### Features
+
+- MySQL
+- PDO
+- CRUD Operations
+- Prepared Statements
+- SQL Injection Protection
+
+---
+
+## 🔐 Project 4 — Authentication & Authorization
+
+### Features
+
+- User Registration
+- Secure Login
+- Password Hashing
+- JWT Authentication
+- RBAC
+- Protected APIs
+
+---
+
+## ⭐ Full Stack Complete Application
+
+Includes
+
+- Complete Frontend
+- PHP Backend
+- REST APIs
+- JWT Authentication
+- MySQL Database
+- Shopping Cart
+- Checkout
+- Reservations
+- Customer Dashboard
+- Admin Dashboard
 
 ---
 
 # 🎨 Design System
 
-Savoria follows a premium restaurant theme with a modern user experience.
+### Theme
+
+Premium Restaurant Experience
 
 ### Color Palette
 
-- 🖤 Charcoal (#1F1B18)
-- 🧡 Terracotta (#C4602E)
-- 💛 Antique Gold (#D9A441)
-- 🤍 Cream Background
+- 🖤 Charcoal
+- 🧡 Terracotta
+- 💛 Antique Gold
+- 🤍 Cream
 
 ### Typography
 
-- Playfair Display (Headings)
-- Inter (Body Text)
+- Playfair Display
+- Inter
 
 ---
 
-# 💻 Tech Stack
+# 💻 Technology Stack
 
 ### Frontend
 
@@ -98,7 +237,6 @@ Savoria follows a premium restaurant theme with a modern user experience.
 ### Backend
 
 - PHP 8+
-- REST API
 
 ### Database
 
@@ -107,47 +245,66 @@ Savoria follows a premium restaurant theme with a modern user experience.
 
 ### Authentication
 
-- JWT Authentication
-- Password Hashing (bcrypt)
-- Role-Based Access Control (RBAC)
+- JWT
+- bcrypt
+- Role-Based Access Control
+
+### Tools
+
+- Git
+- GitHub
+- VS Code
+- XAMPP
 
 ---
 
-# 🚀 Getting Started
+# 🚀 Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/irtazahyder834/DecodeLabs-Internship.git
 ```
 
-### Navigate to the Project
+---
+
+## Navigate
 
 ```bash
 cd full-stack-complete-app
 ```
 
-### Import Database
+---
+
+## Import Database
 
 ```bash
 mysql -u root -p < database/savoria_full_schema.sql
 ```
 
-### Start Backend
+---
+
+## Start Backend
 
 ```bash
 cd backend
+
 php -S localhost:8000 index.php
 ```
 
-### Start Frontend
+---
+
+## Start Frontend
 
 ```bash
 cd ../frontend
+
 php -S localhost:5500
 ```
 
-### Open in Browser
+---
+
+## Open Browser
 
 ```
 http://localhost:5500
@@ -155,40 +312,62 @@ http://localhost:5500
 
 ---
 
-# ✨ Key Features
+# 📌 Future Improvements
 
-- ✅ Responsive Restaurant Website
-- ✅ Online Food Ordering
-- ✅ Shopping Cart
-- ✅ Table Reservation
-- ✅ Secure Authentication
-- ✅ JWT Authorization
-- ✅ Role-Based Access
-- ✅ MySQL Database
-- ✅ RESTful APIs
-- ✅ CRUD Operations
-- ✅ Admin Dashboard
-- ✅ Customer Dashboard
-- ✅ Mobile Friendly Design
+- 💳 Online Payment Gateway
+- 📧 Email Notifications
+- 📱 Progressive Web App
+- 📈 Analytics Dashboard
+- 🍕 Live Order Tracking
+- 🌐 Multi-language Support
+- 🔔 Push Notifications
+- ⭐ Customer Reviews
+- ❤️ Wishlist
+- 🎁 Discount Coupons
 
 ---
 
 # 👨‍💻 Developer
 
-### Irtaza Hyder
+## Irtaza Hyder
 
-**BS Computer Science Student**
+**BS Computer Science**
 
-🚀 DecodeLabs Full Stack Development Internship — **Batch 2026**
+**Full Stack Developer**
 
-Passionate about Full Stack Development, Backend Engineering, REST APIs, and Modern Web Technologies.
+DecodeLabs Full Stack Development Internship — Batch 2026
+
+### Skills
+
+- HTML5
+- CSS3
+- JavaScript
+- PHP
+- MySQL
+- REST API
+- JWT
+- Git
+- GitHub
 
 ---
 
+# 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork this repository and submit a Pull Request.
+
+
 # ⭐ Support
 
-If you found this repository useful, please consider giving it a **⭐ Star**.
+If you found this repository helpful,
 
-Your support helps improve future open-source projects.
+please consider giving it a ⭐ Star.
 
-**Happy Coding! 🚀**
+It helps support future projects.
+
+---
+
+<h3 align="center">
+Made with ❤️ by Irtaza Hyder
+</h3>
