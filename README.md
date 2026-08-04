@@ -8,7 +8,7 @@
 A modern Full Stack Restaurant Management & Food Ordering Platform developed during the
 <strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
 </p>
-<p align="center">
+<p>
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)
