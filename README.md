@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.png" alt="Heart Disease Prediction Banner" width="100%">
+  <img src="banner.png" alt="Savoria Fine Dining & Food Ordering Platform Banner" width="100%">
 </p>
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
