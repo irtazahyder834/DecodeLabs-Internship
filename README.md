@@ -2,7 +2,7 @@
   <img src="banner.png" alt="Savoria – Full Stack Restaurant Management System" width="100%">
 </p>
 
-<h1 align="center">🍽️ Savoria – Full Stack Restaurant Management System</h1>
+<h1 align="center">🛎️ Savoria – Full Stack Restaurant Management System</h1>
 
 <p align="center">
 A modern Full Stack Restaurant Management & Food Ordering Platform developed during the
@@ -16,8 +16,13 @@ A modern Full Stack Restaurant Management & Food Ordering Platform developed dur
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens)
-![Status](https://img.shields.io/badge/Status-Completed-success)
 
+![REST API](https://img.shields.io/badge/REST-API-009688?logo=fastapi&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)
+![Responsive](https://img.shields.io/badge/Responsive-Yes-28A745?logo=googlechrome&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Status](https://img.shields.io/badge/Status-Completed-success)
 </p>
 
 ---
