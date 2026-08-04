@@ -1,4 +1,4 @@
-![Savoria Banner](banner.png)
+<img src="banner.png" alt="Savoria Banner" width="100%">
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
 
