@@ -2,12 +2,12 @@
   <img src="banner.png" alt="Savoria – Full Stack Restaurant Management System" width="100%">
 </p>
 
-<h1 align="center">🍽️ DecodeLabs Internship – Full Stack Development Projects</h1>
+<h1 align="center">🍽️ Savoria – Full Stack Restaurant Management System</h1>
 
 <p align="center">
-A complete collection of projects developed during the <strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
+A modern Full Stack Restaurant Management & Food Ordering Platform developed during the
+<strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
 </p>
-
 <p align="center">
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
