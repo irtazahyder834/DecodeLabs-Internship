@@ -57,15 +57,15 @@ The final application **Savoria** combines all internship milestones into a prod
 
 ---
 
-## 🍽️ Menu Page
+## 🔐 Login Page
 
-<img src="screenshots/menu.png" width="100%">
+<img src="screenshots/login.png" width="100%">
 
 ---
 
-## 🛒 Shopping Cart
+## 🍽️ Menu Page
 
-<img src="screenshots/cart.png" width="100%">
+<img src="screenshots/menu.png" width="100%">
 
 ---
 
@@ -75,27 +75,9 @@ The final application **Savoria** combines all internship milestones into a prod
 
 ---
 
-## 🪑 Table Reservation
-
-<img src="screenshots/reservation.png" width="100%">
-
----
-
-## 🔐 Login Page
-
-<img src="screenshots/login.png" width="100%">
-
----
-
 ## 📝 Registration Page
 
 <img src="screenshots/register.png" width="100%">
-
----
-
-## 👤 Customer Dashboard
-
-<img src="screenshots/customer-dashboard.png" width="100%">
 
 ---
 
@@ -105,11 +87,6 @@ The final application **Savoria** combines all internship milestones into a prod
 
 ---
 
-## 📦 Order Management
-
-<img src="screenshots/orders.png" width="100%">
-
----
 
 # 📂 Repository Structure
 
