@@ -1,4 +1,4 @@
-![Savoria Fine Dining & Food Ordering Platform Banner](banner.png)
+![Savoria Fine Dining & Food Ordering Platform Banner](./banner.png)
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
 
