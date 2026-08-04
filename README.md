@@ -69,12 +69,6 @@ The final application **Savoria** combines all internship milestones into a prod
 
 ---
 
-## 💳 Checkout
-
-<img src="screenshots/checkout.png" width="100%">
-
----
-
 ## 📝 Registration Page
 
 <img src="screenshots/register.png" width="100%">
