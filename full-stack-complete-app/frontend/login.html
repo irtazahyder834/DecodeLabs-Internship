@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — Savoria</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<div class="auth-page">
+  <a href="index.html" class="auth-back">← Back to Savoria</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" style="position:absolute; top:28px; right:28px;">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="auth-card">
+    <div class="auth-logo"><img src="assets/logo.svg" alt="Savoria"></div>
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to track orders, save details, and book faster.</p>
+
+    <div class="auth-alert" id="loginAlert"></div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <div class="form-error" data-error-for="email"></div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+        <div class="form-error" data-error-for="password"></div>
+        <div style="text-align:right; margin-top:6px;"><a href="forgot-password.html" style="font-size:0.85rem;">Forgot password?</a></div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Log In</button>
+    </form>
+
+    <div class="auth-footer-link">Don't have an account? <a href="register.html">Create one</a></div>
+
+    <div class="demo-accounts">
+      <strong>Demo accounts</strong> (password: <code>Password123!</code>)<br>
+      Admin: <code>admin@savoria.example</code> · Staff: <code>staff@savoria.example</code> · Customer: <code>ayesha@savoria.example</code>
+    </div>
+  </div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const alertBox = document.getElementById('loginAlert');
+    const btn = document.getElementById('loginBtn');
+    alertBox.className = 'auth-alert';
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    btn.disabled = true;
+    btn.textContent = 'Logging in...';
+
+    try {
+      await SavoriaAPI.login({ email, password });
+      alertBox.className = 'auth-alert success show';
+      alertBox.textContent = 'Login successful — redirecting...';
+      setTimeout(() => { window.location.href = 'index.html'; }, 800);
+    } catch (err) {
+      alertBox.className = 'auth-alert error show';
+      alertBox.textContent = err.message || 'Login failed. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Log In';
+    }
+  });
+</script>
+</body>
+</html>

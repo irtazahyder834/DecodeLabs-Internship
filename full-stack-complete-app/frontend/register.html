@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account — Savoria</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<div class="auth-page">
+  <a href="index.html" class="auth-back">← Back to Savoria</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" style="position:absolute; top:28px; right:28px;">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="auth-card">
+    <div class="auth-logo"><img src="assets/logo.svg" alt="Savoria"></div>
+    <h1>Create your account</h1>
+    <p class="auth-sub">Faster checkout, saved details, and order history.</p>
+
+    <div class="auth-alert" id="registerAlert"></div>
+
+    <form id="registerForm" novalidate>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" required>
+        <div class="form-error" data-error-for="fullName"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <div class="form-error" data-error-for="email"></div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" placeholder="03XX-XXXXXXX">
+        <div class="form-error" data-error-for="phone"></div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+        <div class="form-error" data-error-for="password"></div>
+        <small style="color:var(--color-text-muted);font-size:0.78rem;">At least 8 characters, with one uppercase letter and one number.</small>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="registerBtn">Create Account</button>
+    </form>
+
+    <div class="auth-footer-link">Already have an account? <a href="login.html">Log in</a></div>
+  </div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script>
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const alertBox = document.getElementById('registerAlert');
+    const btn = document.getElementById('registerBtn');
+    alertBox.className = 'auth-alert';
+    document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+
+    const payload = {
+      full_name: document.getElementById('fullName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      password: document.getElementById('password').value,
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Creating account...';
+
+    try {
+      await SavoriaAPI.register(payload);
+      alertBox.className = 'auth-alert success show';
+      alertBox.textContent = 'Account created! Redirecting to log in...';
+      setTimeout(() => { window.location.href = 'login.html'; }, 1000);
+    } catch (err) {
+      alertBox.className = 'auth-alert error show';
+      alertBox.textContent = err.message || 'Registration failed. Please try again.';
+      if (err.errors) {
+        Object.entries(err.errors).forEach(([field, msg]) => {
+          const key = field === 'full_name' ? 'fullName' : field;
+          const el = document.querySelector(`[data-error-for="${key}"]`);
+          if (el) el.textContent = msg;
+        });
+      }
+      btn.disabled = false;
+      btn.textContent = 'Create Account';
+    }
+  });
+</script>
+</body>
+</html>

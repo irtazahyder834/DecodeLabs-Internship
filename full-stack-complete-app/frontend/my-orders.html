@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders — Savoria</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.svg" alt="Savoria"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#reservation">Reservations</a>
+      <a href="track-order.html">Track an Order</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <span id="navGuestLinks"><a href="login.html" class="btn btn-outline btn-sm">Log In</a></span>
+      <div class="nav-account visually-hidden" id="navAccount">
+        <button id="navAccountTrigger" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="navAccountName">Account</span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu">
+          <span class="role-badge" id="navRoleBadge">customer</span>
+          <a href="my-orders.html">My Orders</a>
+          <a href="admin.html" id="navAdminLink" style="display:none;">Admin Panel</a>
+          <button id="navLogoutBtn">Log Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+    <div id="authGate">
+      <div class="access-denied">
+        <h1>Log in to view your orders</h1>
+        <p style="color:var(--text-secondary); margin:12px 0 20px;">Your order history is tied to your Savoria account.</p>
+        <a href="login.html" class="btn btn-primary">Log In</a>
+      </div>
+    </div>
+
+    <div id="ordersView" style="display:none;">
+      <div class="dashboard-header">
+        <div>
+          <h1>My Orders</h1>
+          <p>Your past and current orders with Savoria.</p>
+        </div>
+      </div>
+      <div id="ordersList"></div>
+    </div>
+  </div>
+</main>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const formatPKR = (amount) => 'Rs. ' + Number(amount).toLocaleString('en-PK');
+  const formatDate = (iso) => new Date(iso).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' });
+
+  async function loadMyOrders() {
+    const gate = document.getElementById('authGate');
+    const view = document.getElementById('ordersView');
+
+    if (!SavoriaAPI.isLoggedIn()) {
+      gate.style.display = 'block';
+      view.style.display = 'none';
+      return;
+    }
+    gate.style.display = 'none';
+    view.style.display = 'block';
+
+    const listEl = document.getElementById('ordersList');
+    try {
+      const orders = await SavoriaAPI.getMyOrders();
+      if (!orders.length) {
+        listEl.innerHTML = `<div class="empty-state">You haven't placed any orders yet. <a href="index.html#menu">Browse the menu</a> to get started.</div>`;
+        return;
+      }
+      listEl.innerHTML = orders.map(o => `
+        <div class="order-card">
+          <div class="order-card-top">
+            <h3>Order #${o.id}</h3>
+            <span class="status-pill ${o.status}">${o.status.replace(/_/g, ' ')}</span>
+          </div>
+          <div class="order-card-meta">${formatDate(o.created_at)} · ${o.order_type.replace('_', ' ')}</div>
+          <div class="order-card-footer" style="margin-top:12px;">
+            <span>Total</span>
+            <span>${formatPKR(o.total_amount)}</span>
+          </div>
+          <div style="margin-top:12px;">
+            <a href="track-order.html?id=${o.id}" class="btn btn-outline btn-sm">Track this order</a>
+          </div>
+        </div>
+      `).join('');
+    } catch (err) {
+      listEl.innerHTML = `<div class="empty-state">Couldn't load your orders (${err.message}).</div>`;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = SavoriaAPI.getCurrentUser();
+    const adminLink = document.getElementById('navAdminLink');
+    if (adminLink && user && ['staff', 'admin'].includes(user.role)) adminLink.style.display = 'block';
+    loadMyOrders();
+  });
+</script>
+</body>
+</html>

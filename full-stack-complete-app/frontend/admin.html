@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Savoria</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.svg" alt="Savoria"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="my-orders.html">My Orders</a>
+      <a href="track-order.html">Track an Order</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <span id="navGuestLinks"><a href="login.html" class="btn btn-outline btn-sm">Log In</a></span>
+      <div class="nav-account visually-hidden" id="navAccount">
+        <button id="navAccountTrigger" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="navAccountName">Account</span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu">
+          <span class="role-badge" id="navRoleBadge">customer</span>
+          <a href="my-orders.html">My Orders</a>
+          <a href="admin.html">Admin Panel</a>
+          <button id="navLogoutBtn">Log Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+    <div id="deniedView" style="display:none;">
+      <div class="access-denied">
+        <h1>Staff access required</h1>
+        <p style="color:var(--text-secondary); margin:12px 0 20px;">Log in with a staff or admin account to manage orders and reservations.</p>
+        <a href="login.html" class="btn btn-primary">Log In</a>
+      </div>
+    </div>
+
+    <div id="panelView" style="display:none;">
+      <div class="dashboard-header">
+        <div>
+          <h1>Admin Panel</h1>
+          <p>Manage today's orders and table reservations.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="statGrid"></div>
+
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="orders">Orders</button>
+        <button class="tab-btn" data-tab="reservations">Reservations</button>
+      </div>
+
+      <section id="ordersTab">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>ID</th><th>Customer</th><th>Type</th><th>Total</th><th>Placed</th><th>Status</th></tr></thead>
+            <tbody id="ordersTableBody"><tr><td colspan="6">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="reservationsTab" style="display:none;">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>ID</th><th>Name</th><th>Party</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+            <tbody id="reservationsTableBody"><tr><td colspan="6">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const formatPKR = (amount) => 'Rs. ' + Number(amount).toLocaleString('en-PK');
+  const formatDateTime = (iso) => new Date(iso).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' });
+  const ORDER_STATUSES = ['pending', 'confirmed', 'preparing', 'out_for_delivery', 'delivered', 'cancelled'];
+  const RESERVATION_STATUSES = ['pending', 'confirmed', 'cancelled', 'completed'];
+
+  function statusSelect(id, current, options, onChange) {
+    return `<select data-id="${id}">${options.map(s => `<option value="${s}" ${s === current ? 'selected' : ''}>${s.replace(/_/g,' ')}</option>`).join('')}</select>`;
+  }
+
+  async function loadSummary() {
+    const grid = document.getElementById('statGrid');
+    try {
+      const s = await SavoriaAPI.getAdminSummary();
+      grid.innerHTML = `
+        <div class="stat-card"><div class="stat-label">Orders Today</div><div class="stat-value">${s.orders_today}</div></div>
+        <div class="stat-card"><div class="stat-label">Revenue Today</div><div class="stat-value">${formatPKR(s.revenue_today)}</div></div>
+        <div class="stat-card"><div class="stat-label">Active Orders</div><div class="stat-value">${s.pending_orders}</div></div>
+        <div class="stat-card"><div class="stat-label">Pending Reservations</div><div class="stat-value">${s.pending_reservations}</div></div>
+      `;
+    } catch (err) {
+      grid.innerHTML = `<div class="empty-state">Couldn't load stats (${err.message}).</div>`;
+    }
+  }
+
+  async function loadOrders() {
+    const body = document.getElementById('ordersTableBody');
+    try {
+      const orders = await SavoriaAPI.getAllOrders();
+      if (!orders.length) { body.innerHTML = `<tr><td colspan="6">No orders yet.</td></tr>`; return; }
+      body.innerHTML = orders.map(o => `
+        <tr>
+          <td>#${o.id}</td>
+          <td>${o.customer_name}</td>
+          <td>${o.order_type.replace('_', ' ')}</td>
+          <td>${formatPKR(o.total_amount)}</td>
+          <td>${formatDateTime(o.created_at)}</td>
+          <td>${statusSelect(o.id, o.status, ORDER_STATUSES)}</td>
+        </tr>
+      `).join('');
+      body.querySelectorAll('select').forEach(sel => {
+        sel.addEventListener('change', async () => {
+          sel.disabled = true;
+          try {
+            await SavoriaAPI.updateOrderStatus(sel.dataset.id, sel.value);
+            loadSummary();
+          } catch (err) {
+            alert('Could not update order: ' + err.message);
+          } finally {
+            sel.disabled = false;
+          }
+        });
+      });
+    } catch (err) {
+      body.innerHTML = `<tr><td colspan="6">Couldn't load orders (${err.message}).</td></tr>`;
+    }
+  }
+
+  async function loadReservations() {
+    const body = document.getElementById('reservationsTableBody');
+    try {
+      const reservations = await SavoriaAPI.getAllReservations();
+      if (!reservations.length) { body.innerHTML = `<tr><td colspan="6">No reservations yet.</td></tr>`; return; }
+      body.innerHTML = reservations.map(r => `
+        <tr>
+          <td>#${r.id}</td>
+          <td>${r.full_name}</td>
+          <td>${r.party_size}</td>
+          <td>${r.reservation_date}</td>
+          <td>${r.reservation_time}</td>
+          <td>${statusSelect(r.id, r.status, RESERVATION_STATUSES)}</td>
+        </tr>
+      `).join('');
+      body.querySelectorAll('select').forEach(sel => {
+        sel.addEventListener('change', async () => {
+          sel.disabled = true;
+          try {
+            await SavoriaAPI.updateReservationStatus(sel.dataset.id, sel.value);
+            loadSummary();
+          } catch (err) {
+            alert('Could not update reservation: ' + err.message);
+          } finally {
+            sel.disabled = false;
+          }
+        });
+      });
+    } catch (err) {
+      body.innerHTML = `<tr><td colspan="6">Couldn't load reservations (${err.message}).</td></tr>`;
+    }
+  }
+
+  function initTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('ordersTab').style.display = btn.dataset.tab === 'orders' ? 'block' : 'none';
+        document.getElementById('reservationsTab').style.display = btn.dataset.tab === 'reservations' ? 'block' : 'none';
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = SavoriaAPI.getCurrentUser();
+    const denied = document.getElementById('deniedView');
+    const panel = document.getElementById('panelView');
+
+    if (!SavoriaAPI.isLoggedIn() || !user || !['staff', 'admin'].includes(user.role)) {
+      denied.style.display = 'block';
+      panel.style.display = 'none';
+      return;
+    }
+    denied.style.display = 'none';
+    panel.style.display = 'block';
+
+    initTabs();
+    loadSummary();
+    loadOrders();
+    loadReservations();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Environment
+.env
+.env.local
+
+# Dependencies
+vendor/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+error_log
+
+# Database
+*.sql.bak

@@ -1,0 +1,10 @@
+# Savoria — Full-Stack Complete App: Frontend
+# No build tools required — pure HTML5, CSS3, and vanilla JavaScript.
+#
+# This frontend calls the backend API at http://localhost:8000 by default
+# (see js/api.js -> BASE_URL). Start the backend first (see ../backend/README.md),
+# then serve this folder with any static file server:
+#
+#   python3 -m http.server 8080
+#
+# Visit: http://localhost:8080

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savoria — Fine Dining & Food Ordering</title>
+<meta name="description" content="Savoria is a modern fine-dining restaurant offering an elevated menu, table reservations, and doorstep delivery across the city.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.svg" alt="Savoria"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <div class="nav-item-dropdown">
+        <a href="#menu">Menu</a>
+        <div class="nav-dropdown-panel">
+          <a href="#menu">Starters <span class="count">4 dishes</span></a>
+          <a href="#menu">Mains <span class="count">4 dishes</span></a>
+          <a href="#menu">Desserts <span class="count">2 dishes</span></a>
+          <a href="#menu">Beverages <span class="count">2 dishes</span></a>
+        </div>
+      </div>
+      <a href="#reservation">Reservations</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="cart-trigger" id="cartTrigger" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+
+      <span id="navGuestLinks">
+        <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      </span>
+
+      <div class="nav-account visually-hidden" id="navAccount">
+        <button id="navAccountTrigger" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="navAccountName">Account</span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu">
+          <span class="role-badge" id="navRoleBadge">customer</span>
+          <a href="my-orders.html">My Orders</a>
+          <a href="track-order.html">Track an Order</a>
+          <a href="admin.html" id="navAdminLink" style="display:none;">Admin Panel</a>
+          <button id="navLogoutBtn">Log Out</button>
+        </div>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>Your Order</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cart-drawer-scroll">
+    <div class="cart-drawer-body" id="cartBody">
+      <div class="cart-empty">Your cart is empty.<br>Browse the menu to add something delicious.</div>
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-estimate" id="cartEstimate" style="display:none;"></div>
+      <div class="promo-row">
+        <input type="text" id="promoInput" placeholder="Promo code (e.g. SAVORIA10)">
+        <button type="button" class="btn btn-outline btn-sm" id="promoApplyBtn">Apply</button>
+      </div>
+      <div class="promo-msg" id="promoMsg"></div>
+      <div class="cart-total-row" id="cartSubtotalRow" style="display:none;font-weight:500;font-size:0.9rem;color:var(--text-secondary);"><span>Subtotal</span><span id="cartSubtotal">Rs. 0</span></div>
+      <div class="cart-total-row" id="cartDiscountRow" style="display:none;font-weight:500;font-size:0.9rem;color:var(--color-success);"><span>Discount</span><span id="cartDiscount">− Rs. 0</span></div>
+      <div class="cart-total-row"><span>Total</span><span id="cartTotal">Rs. 0</span></div>
+      <a class="whatsapp-order-btn" id="whatsappOrderBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.83 13.28L3 21l3.85-1.2a8.9 8.9 0 0 0 5.2 1.66h.01A8.94 8.94 0 0 0 21 12.5a8.87 8.87 0 0 0-3.4-6.18Zm-5.55 13.7a7.4 7.4 0 0 1-3.78-1.03l-.27-.16-2.28.71.72-2.22-.17-.28a7.42 7.42 0 1 1 13.8-3.83 7.44 7.44 0 0 1-7.02 6.8Zm4.06-5.56c-.22-.11-1.3-.64-1.5-.72-.2-.07-.35-.11-.5.11-.15.22-.57.72-.7.87-.13.15-.26.16-.48.05a6.1 6.1 0 0 1-1.79-1.1 6.7 6.7 0 0 1-1.24-1.55c-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.08-.15.04-.28-.02-.4-.06-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43a.82.82 0 0 0-.6.28c-.2.22-.79.77-.79 1.87s.81 2.17.92 2.32c.11.15 1.6 2.44 3.87 3.42.54.23.96.37 1.29.48.54.17 1.03.15 1.42.09.43-.06 1.3-.53 1.49-1.04.18-.51.18-.94.13-1.03-.06-.1-.2-.16-.42-.27Z"/></svg>
+        Order via WhatsApp instead
+      </a>
+      <form id="checkoutForm">
+        <div id="checkoutStatus" class="auth-alert"></div>
+        <div class="form-group">
+          <label for="checkoutName">Full Name</label>
+          <input type="text" id="checkoutName" required>
+        </div>
+        <div class="form-group">
+          <label for="checkoutPhone">Phone</label>
+          <input type="tel" id="checkoutPhone" required>
+        </div>
+        <div class="form-group">
+          <label for="checkoutOrderType">Order Type</label>
+          <select id="checkoutOrderType" required>
+            <option value="delivery">Delivery</option>
+            <option value="pickup">Pickup</option>
+            <option value="dine_in">Dine-in</option>
+          </select>
+        </div>
+        <div class="form-group" id="checkoutAddressGroup">
+          <label for="checkoutAddress">Delivery Address</label>
+          <input type="text" id="checkoutAddress" placeholder="House / street / area">
+        </div>
+        <div class="form-group" id="checkoutTableGroup" style="display:none;">
+          <label for="checkoutTable">Table Number</label>
+          <input type="number" id="checkoutTable" min="1" placeholder="e.g. 5">
+        </div>
+        <div class="form-group">
+          <label for="checkoutNotes">Order Notes <span style="font-weight:400;color:var(--color-text-muted);">(optional)</span></label>
+          <textarea id="checkoutNotes" placeholder="Allergies, spice preference, extra sauce, no onions..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+      </form>
+    </div>
+  </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Est. 2019 · Downtown Karachi</span>
+      <h1>Modern flavors, <em>timeless</em> hospitality.</h1>
+      <p>Savoria brings together seasonal ingredients and refined technique — dine in our candlelit hall, reserve a table in seconds, or have chef-crafted dishes delivered to your door.</p>
+      <div class="hero-actions">
+        <a href="#reservation" class="btn btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn btn-outline">Order Online</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>4.9★</strong><span>Average rating</span></div>
+        <div class="hero-stat"><strong>12k+</strong><span>Orders delivered</span></div>
+        <div class="hero-stat"><strong>7</strong><span>Years serving the city</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-visual-frame">
+        <span class="hero-tag-pill">Chef's Table</span>
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Savoria candlelit dining hall with plated dishes">
+      </div>
+      <div class="hero-visual-accent">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80" alt="Slow-braised lamb shank plated dish">
+      </div>
+      <div class="hero-badge-card">
+        <div class="badge-icon">4.9</div>
+        <div><strong>Excellent Rating</strong><span>2,300+ verified reviews</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <div class="frame-main">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Chef plating a dish in the Savoria kitchen">
+      </div>
+      <div class="frame-accent">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Savoria dining hall interior">
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-eyebrow">Our Story</span>
+      <h2>A kitchen built on craft, not shortcuts.</h2>
+      <p>Founded by a small team of chefs who trained across Karachi, Dubai, and Lyon, Savoria was built to prove that thoughtful ingredients and unhurried technique still matter.</p>
+      <div class="about-points">
+        <div class="about-point"><div class="icon">1</div><div><h4>Locally sourced</h4><p>Produce delivered daily from trusted regional farms.</p></div></div>
+        <div class="about-point"><div class="icon">2</div><div><h4>Chef-led menu</h4><p>Seasonal dishes designed and tested in-house every quarter.</p></div></div>
+        <div class="about-point"><div class="icon">3</div><div><h4>Order online in seconds</h4><p>Real-time menu availability, secure checkout, live status updates.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENU ================= -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Menu</span>
+      <h2>Order straight from the kitchen</h2>
+      <p>This menu is loaded live from the Savoria database — add dishes to your cart and check out below.</p>
+    </div>
+
+    <div class="menu-filters">
+      <button class="menu-filter-btn active" data-filter="all">All</button>
+      <button class="menu-filter-btn" data-filter="starters">Starters</button>
+      <button class="menu-filter-btn" data-filter="mains">Mains</button>
+      <button class="menu-filter-btn" data-filter="desserts">Desserts</button>
+      <button class="menu-filter-btn" data-filter="beverages">Beverages</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <p style="grid-column:1/-1;text-align:center;color:var(--color-text-muted);">Loading menu…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESERVATION ================= -->
+<section class="reservation" id="reservation">
+  <div class="container">
+    <div class="reservation-text reveal">
+      <span class="section-eyebrow">Book Ahead</span>
+      <h2>Reserve your table</h2>
+      <p>Tables fill quickly on weekends. Secure yours in under a minute.</p>
+      <ul class="reservation-perks">
+        <li>Instant confirmation by email</li>
+        <li>Free cancellation up to 2 hours before</li>
+        <li>Special requests welcome (allergies, occasions)</li>
+        <li>Priority seating for parties of 6+</li>
+      </ul>
+    </div>
+
+    <form class="reservation-form reveal" id="reservationForm" novalidate>
+      <div class="form-success-msg" id="reservationSuccess"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="resName">Full Name</label>
+          <input type="text" id="resName" required>
+        </div>
+        <div class="form-group">
+          <label for="resPhone">Phone</label>
+          <input type="tel" id="resPhone" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="resDate">Date</label>
+          <input type="date" id="resDate" required>
+        </div>
+        <div class="form-group">
+          <label for="resTime">Time</label>
+          <select id="resTime" required>
+            <option value="">Select time</option>
+            <option>6:00 PM</option><option>6:30 PM</option><option>7:00 PM</option>
+            <option>7:30 PM</option><option>8:00 PM</option><option>8:30 PM</option><option>9:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="resGuests">Party Size</label>
+        <select id="resGuests" required>
+          <option value="">Select guests</option>
+          <option value="1">1 guest</option><option value="2">2 guests</option><option value="3">3 guests</option>
+          <option value="4">4 guests</option><option value="5">5 guests</option><option value="6+">6+ guests</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="resNotes">Special Requests (optional)</label>
+        <textarea id="resNotes" placeholder="Allergies, celebration, seating preference..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Confirm Reservation</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="testimonials" id="reviews">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Guest Reviews</span>
+      <h2>What diners are saying</h2>
+    </div>
+    <div class="testimonial-track" id="testimonialTrack">
+      <div class="testimonial-slide active">
+        <div class="stars">★★★★★</div>
+        <p>"Every course felt intentional. The lamb shank has genuinely ruined every other restaurant for me."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Hina R.">
+          <div><strong>Hina R.</strong><span>Regular guest, 3 years</span></div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="stars">★★★★★</div>
+        <p>"Ordered delivery on a whim through the site — it arrived hot, and the checkout took under a minute."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Bilal S.">
+          <div><strong>Bilal S.</strong><span>First-time customer</span></div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="stars">★★★★★</div>
+        <p>"Booked a table for eight on short notice through the site — smooth process, confirmed instantly."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&q=80" alt="Farah A.">
+          <div><strong>Farah A.</strong><span>Corporate events client</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<div class="gallery-band">
+  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" alt="Restaurant interior">
+  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Plated dish">
+  <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=400&q=80" alt="Dessert plating">
+  <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&q=80" alt="Chef at work">
+  <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&q=80" alt="Table setting">
+</div>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info-card reveal">
+      <h3>Visit or reach us</h3>
+      <div class="contact-info-item"><div class="icon">📍</div><div><strong>Address</strong><span>12-C Zamzama Boulevard, Clifton, Karachi</span></div></div>
+      <div class="contact-info-item"><div class="icon">📞</div><div><strong>Phone</strong><span>+92 21 111 728 674</span></div></div>
+      <div class="contact-info-item"><div class="icon">✉️</div><div><strong>Email</strong><span>hello@savoria.example</span></div></div>
+      <div class="contact-hours">
+        <div><span>Mon – Thu</span><span>5:00 PM – 11:00 PM</span></div>
+        <div><span>Fri – Sun</span><span>1:00 PM – 12:00 AM</span></div>
+      </div>
+    </div>
+    <div class="contact-form-card reveal">
+      <h3>Send us a message</h3>
+      <p style="color:var(--color-text-muted);font-size:0.9rem;">For order or reservation questions, call us directly for the fastest response. General inquiries: <strong>hello@savoria.example</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="Savoria">
+        <p>A modern fine-dining kitchen serving Karachi since 2019 — dine in, pick up, or have it delivered.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Order Online</a></li>
+          <li><a href="#reservation">Reservations</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Log In</a></li>
+          <li><a href="register.html">Create Account</a></li>
+          <li><a href="my-orders.html">My Orders</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="track-order.html">Track an Order</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Savoria. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

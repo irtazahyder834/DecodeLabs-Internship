@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Your Order — Savoria</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+<script>(function(){try{var t=localStorage.getItem('savoria_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.svg" alt="Savoria"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#reservation">Reservations</a>
+      <a href="my-orders.html">My Orders</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <span id="navGuestLinks"><a href="login.html" class="btn btn-outline btn-sm">Log In</a></span>
+      <div class="nav-account visually-hidden" id="navAccount">
+        <button id="navAccountTrigger" class="btn btn-outline btn-sm">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="navAccountName">Account</span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu">
+          <span class="role-badge" id="navRoleBadge">customer</span>
+          <a href="my-orders.html">My Orders</a>
+          <a href="admin.html" id="navAdminLink" style="display:none;">Admin Panel</a>
+          <button id="navLogoutBtn">Log Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container" style="max-width:720px;">
+    <div class="dashboard-header">
+      <div>
+        <h1>Track Your Order</h1>
+        <p>Enter your order number and the phone number you ordered with.</p>
+      </div>
+    </div>
+
+    <form id="trackForm" class="auth-card" style="max-width:none; margin-bottom: var(--space-6);">
+      <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="form-group">
+          <label for="orderId">Order Number</label>
+          <input type="number" id="orderId" min="1" required>
+        </div>
+        <div class="form-group" id="phoneGroup">
+          <label for="orderPhone">Phone Number</label>
+          <input type="tel" id="orderPhone" placeholder="03XXXXXXXXX">
+        </div>
+      </div>
+      <div class="auth-alert" id="trackAlert"></div>
+      <button type="submit" class="btn btn-primary btn-block" id="trackBtn">Track Order</button>
+    </form>
+
+    <div id="orderResult"></div>
+  </div>
+</main>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const STATUS_FLOW = ['pending', 'confirmed', 'preparing', 'out_for_delivery', 'delivered'];
+  const formatPKR = (amount) => 'Rs. ' + Number(amount).toLocaleString('en-PK');
+  const formatDate = (iso) => new Date(iso).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' });
+
+  function renderTimeline(status) {
+    if (status === 'cancelled') {
+      return `<div class="tracking-timeline"><div class="tracking-step-wrap">
+        <div class="tracking-step-dot" style="background:var(--color-error);border-color:var(--color-error);color:#fff;">✕</div>
+        <div class="tracking-step-label" style="color:var(--color-error);">Cancelled</div>
+      </div></div>`;
+    }
+    const currentIndex = STATUS_FLOW.indexOf(status);
+    return `<div class="tracking-timeline">${STATUS_FLOW.map((step, i) => {
+      const cls = i < currentIndex ? 'done' : i === currentIndex ? 'current' : '';
+      const dot = i < currentIndex ? '✓' : i + 1;
+      return `<div class="tracking-step-wrap ${cls}">
+        <div class="tracking-step-dot">${dot}</div>
+        <div class="tracking-step-label">${step.replace(/_/g, ' ')}</div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  async function renderOrder(id, phone) {
+    const resultEl = document.getElementById('orderResult');
+    const alertBox = document.getElementById('trackAlert');
+    alertBox.className = 'auth-alert';
+
+    try {
+      const order = await SavoriaAPI.getOrder(id, phone);
+      resultEl.innerHTML = `
+        <div class="order-card">
+          <div class="order-card-top">
+            <h3>Order #${order.id}</h3>
+            <span class="status-pill ${order.status}">${order.status.replace(/_/g, ' ')}</span>
+          </div>
+          <div class="order-card-meta">${formatDate(order.created_at)} · ${order.order_type.replace('_', ' ')}</div>
+          ${renderTimeline(order.status)}
+          <ul class="order-items-list">
+            ${order.items.map(i => `<li><span>${i.item_name_snapshot || i.name} × ${i.quantity}</span><span>${formatPKR(i.subtotal)}</span></li>`).join('')}
+          </ul>
+          <div class="order-card-footer"><span>Total</span><span>${formatPKR(order.total_amount)}</span></div>
+        </div>`;
+    } catch (err) {
+      resultEl.innerHTML = '';
+      alertBox.className = 'auth-alert error show';
+      alertBox.textContent = err.message || 'Could not find that order.';
+    }
+  }
+
+  document.getElementById('trackForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('trackBtn');
+    const id = document.getElementById('orderId').value.trim();
+    const phone = document.getElementById('orderPhone').value.trim();
+    btn.disabled = true;
+    btn.textContent = 'Looking up...';
+    await renderOrder(id, phone);
+    btn.disabled = false;
+    btn.textContent = 'Track Order';
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = SavoriaAPI.getCurrentUser();
+    const adminLink = document.getElementById('navAdminLink');
+    if (adminLink && user && ['staff', 'admin'].includes(user.role)) adminLink.style.display = 'block';
+
+    // If logged in, the phone isn't required (ownership is checked via token).
+    if (SavoriaAPI.isLoggedIn()) {
+      document.getElementById('orderPhone').removeAttribute('required');
+      document.querySelector('#phoneGroup label').textContent = 'Phone Number (optional — you\'re logged in)';
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const presetId = params.get('id');
+    if (presetId) {
+      document.getElementById('orderId').value = presetId;
+      if (SavoriaAPI.isLoggedIn()) renderOrder(presetId, '');
+    }
+  });
+</script>
+</body>
+</html>

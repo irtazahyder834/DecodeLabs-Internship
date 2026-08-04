@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "category": "starters",
+    "name": "Charred Corn & Burrata",
+    "description": "Grilled sweet corn, torn burrata, chili oil, micro basil.",
+    "price": 950,
+    "is_available": true,
+    "spice_level": 1,
+    "prep_time_minutes": 12
+  },
+  {
+    "id": 2,
+    "category": "starters",
+    "name": "Smoked Prawn Toast",
+    "description": "Brioche, smoked prawn butter, pickled shallot, lime zest.",
+    "price": 1150,
+    "is_available": true,
+    "spice_level": 2,
+    "prep_time_minutes": 15
+  },
+  {
+    "id": 3,
+    "category": "mains",
+    "name": "Slow-Braised Lamb Shank",
+    "description": "Red wine jus, saffron mash, roasted root vegetables.",
+    "price": 2450,
+    "is_available": true,
+    "spice_level": 1,
+    "prep_time_minutes": 35
+  },
+  {
+    "id": 4,
+    "category": "mains",
+    "name": "Charcoal Grilled Salmon",
+    "description": "Miso glaze, sesame greens, ginger-scallion oil.",
+    "price": 2150,
+    "is_available": true,
+    "spice_level": 1,
+    "prep_time_minutes": 25
+  },
+  {
+    "id": 5,
+    "category": "mains",
+    "name": "Wild Mushroom Risotto",
+    "description": "Arborio rice, truffle oil, aged parmesan, crisped sage.",
+    "price": 1850,
+    "is_available": false,
+    "spice_level": 0,
+    "prep_time_minutes": 28
+  },
+  {
+    "id": 6,
+    "category": "desserts",
+    "name": "Dark Chocolate Fondant",
+    "description": "Molten center, pistachio crumble, vanilla bean ice cream.",
+    "price": 850,
+    "is_available": true,
+    "spice_level": 0,
+    "prep_time_minutes": 18
+  },
+  {
+    "id": 7,
+    "category": "beverages",
+    "name": "Rose & Cardamom Cooler",
+    "description": "House-made rose syrup, cardamom, soda, fresh mint.",
+    "price": 550,
+    "is_available": true,
+    "spice_level": 0,
+    "prep_time_minutes": 5
+  }
+]

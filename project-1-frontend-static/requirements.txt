@@ -1,0 +1,13 @@
+# Savoria — Project 1: Static Frontend
+# No build tools or package managers required.
+#
+# This project is pure HTML5, CSS3, and vanilla JavaScript (ES6+).
+# To run locally, simply open index.html in a browser, or serve the
+# folder with any static file server, e.g.:
+#
+#   python3 -m http.server 8080
+#
+# Then visit: http://localhost:8080
+
+# Optional (for local development convenience):
+# live-server (Node.js) - https://www.npmjs.com/package/live-server
