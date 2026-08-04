@@ -21,7 +21,6 @@ A modern Full Stack Restaurant Management & Food Ordering Platform developed dur
   <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/Responsive-Mobile-green?logo=googlechrome&logoColor=white">
-  <img src="https://img.shields.io/badge/License-MIT-blue">
   <img src="https://img.shields.io/badge/Status-Completed-success">
 
 </p>
