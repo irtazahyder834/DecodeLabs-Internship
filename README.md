@@ -130,8 +130,6 @@ DecodeLabs-Internship
 │
 ├── banner.png
 │
-├── LICENSE
-│
 └── README.md
 ```
 
