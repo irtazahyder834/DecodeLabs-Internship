@@ -1,57 +1,187 @@
-![Savoria banner](banner.svg)
+![Savoria Banner](banner.svg)
 
-# 🍽️ Savoria — Fine Dining & Food Ordering Platform
+# 🚀 DecodeLabs Internship – Full Stack Development Projects
 
-A complete full-stack project suite built with **HTML5, CSS3, vanilla JavaScript, PHP, and MySQL** — structured as four progressive, standalone projects plus one combined application, mirroring a real internship-style deliverable pipeline.
+### 🍽️ Featured Project: Savoria – Fine Dining & Food Ordering Platform
 
-**Savoria** is a fine-dining restaurant and food-ordering brand: a menu system, cart & checkout, table reservations, and full authentication with role-based access control (customer / staff / admin).
+A complete collection of projects developed during the **DecodeLabs Full Stack Development Internship (Batch 2026)**.
 
-## 📁 Project Structure
+The repository demonstrates the complete journey of full stack web development—from building a responsive frontend to developing secure REST APIs, integrating MySQL databases, and implementing JWT-based authentication with role-based authorization.
 
-```
-savoria-fullstack-complete/
-├── project-1-frontend-static/       # Pure HTML/CSS/JS landing page (no backend)
-├── project-2-backend-api-json/      # PHP REST API, JSON-file storage
-├── project-3-database-integration/  # PHP + MySQL (PDO), full CRUD, transactions
-├── project-4-auth-authorization/    # JWT auth + role-based access control
-├── full-stack-complete-app/         # Everything combined: live site + API + DB
+The final application, **Savoria**, combines all internship milestones into a modern restaurant management and online food ordering platform.
+
+---
+
+# 📖 Overview
+
+**Savoria** is a production-style Full Stack Restaurant Management System built using modern web technologies.
+
+The application includes:
+
+- 🍽️ Digital Restaurant Website
+- 📋 Interactive Food Menu
+- 🛒 Online Food Ordering
+- 💳 Checkout System
+- 🪑 Table Reservation
+- 👤 Customer Dashboard
+- 👨‍💼 Admin Dashboard
+- 🔐 JWT Authentication
+- 🛡️ Role-Based Access Control
+- 📦 Order Management
+- 🗄️ MySQL Database Integration
+
+---
+
+# 📂 Repository Structure
+
+```text
+DecodeLabs-Internship
+│
+├── project-1-frontend-static
+├── project-2-backend-api-json
+├── project-3-database-integration
+├── project-4-auth-authorization
+├── full-stack-complete-app
 ├── LICENSE
-└── README.md                        # You are here
+└── README.md
 ```
 
-## 🧭 How to Navigate This Suite
+---
 
-Each project builds on the last, isolating one concern at a time — useful both as a learning progression and as four distinct, submission-ready deliverables:
+# 📌 Internship Projects
 
-| # | Project | Focus | Storage |
-|---|---|---|---|
-| 1 | [Static Frontend](project-1-frontend-static/) | Responsive UI, animations, client-side form validation | None (static demo) |
-| 2 | [Backend API (JSON)](project-2-backend-api-json/) | REST routing, request validation, response design | Flat JSON files |
-| 3 | [Database Integration](project-3-database-integration/) | PDO, prepared statements, transactions, relational schema | MySQL |
-| 4 | [Auth & Authorization](project-4-auth-authorization/) | JWT, bcrypt, RBAC middleware | MySQL |
-| — | [Full-Stack Complete App](full-stack-complete-app/) | Everything above, combined into one working product | MySQL |
+| Project | Description |
+|---------|-------------|
+| 🌿 Project 1 | Responsive Frontend using HTML, CSS & JavaScript |
+| ⚙️ Project 2 | PHP REST API with JSON Storage |
+| 🗄️ Project 3 | MySQL Database Integration using PDO |
+| 🔐 Project 4 | JWT Authentication & Role-Based Authorization |
+| ⭐ Final Project | Complete Full Stack Restaurant Management System |
 
-Each project folder has its own `README.md` with setup instructions, an API reference (where applicable), and design notes.
+Each project can be run independently and includes its own documentation.
 
-## 🎨 Design System — "Ember"
+---
 
-A warm, upscale palette distinct from typical SaaS blues: **charcoal** (`#1F1B18`), **terracotta** (`#C4602E`), and **antique gold** (`#D9A441`) on a **cream** background, paired with Playfair Display for headings and Inter for body text.
+# 🎨 Design System
 
-## 🛠️ Tech Stack
+Savoria follows a premium restaurant theme with a modern user experience.
 
-- **Frontend:** HTML5, CSS3 (custom properties, Grid/Flexbox, no framework), vanilla JavaScript (ES6+, `fetch`, `IntersectionObserver`)
-- **Backend:** PHP 8+ (no framework — plain front-controller routing)
-- **Database:** MySQL 8 / MariaDB (PDO with prepared statements throughout)
-- **Auth:** Hand-rolled HS256 JWT + bcrypt password hashing
+### Color Palette
 
-## 🚀 Fastest Path to a Running Demo
+- 🖤 Charcoal (#1F1B18)
+- 🧡 Terracotta (#C4602E)
+- 💛 Antique Gold (#D9A441)
+- 🤍 Cream Background
+
+### Typography
+
+- Playfair Display (Headings)
+- Inter (Body Text)
+
+---
+
+# 💻 Tech Stack
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+
+### Backend
+
+- PHP 8+
+- REST API
+
+### Database
+
+- MySQL
+- PDO
+
+### Authentication
+
+- JWT Authentication
+- Password Hashing (bcrypt)
+- Role-Based Access Control (RBAC)
+
+---
+
+# 🚀 Getting Started
+
+### Clone Repository
+
+```bash
+git clone https://github.com/irtazahyder834/DecodeLabs-Internship.git
+```
+
+### Navigate to the Project
 
 ```bash
 cd full-stack-complete-app
-mysql -u root -p < database/savoria_full_schema.sql
-cd backend && cp .env.example .env && php -S localhost:8000 index.php &
-cd ../frontend && python3 -m http.server 8080
 ```
 
-Then open `http://localhost:8080`.
+### Import Database
 
+```bash
+mysql -u root -p < database/savoria_full_schema.sql
+```
+
+### Start Backend
+
+```bash
+cd backend
+php -S localhost:8000 index.php
+```
+
+### Start Frontend
+
+```bash
+cd ../frontend
+php -S localhost:5500
+```
+
+### Open in Browser
+
+```
+http://localhost:5500
+```
+
+---
+
+# ✨ Key Features
+
+- ✅ Responsive Restaurant Website
+- ✅ Online Food Ordering
+- ✅ Shopping Cart
+- ✅ Table Reservation
+- ✅ Secure Authentication
+- ✅ JWT Authorization
+- ✅ Role-Based Access
+- ✅ MySQL Database
+- ✅ RESTful APIs
+- ✅ CRUD Operations
+- ✅ Admin Dashboard
+- ✅ Customer Dashboard
+- ✅ Mobile Friendly Design
+
+---
+
+# 👨‍💻 Developer
+
+### Irtaza Hyder
+
+**BS Computer Science Student**
+
+🚀 DecodeLabs Full Stack Development Internship — **Batch 2026**
+
+Passionate about Full Stack Development, Backend Engineering, REST APIs, and Modern Web Technologies.
+
+---
+
+# ⭐ Support
+
+If you found this repository useful, please consider giving it a **⭐ Star**.
+
+Your support helps improve future open-source projects.
+
+**Happy Coding! 🚀**
