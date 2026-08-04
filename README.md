@@ -8,7 +8,7 @@
 A modern Full Stack Restaurant Management & Food Ordering Platform developed during the
 <strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
 </p>
-<p>
+<center><p>
 
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)
@@ -17,14 +17,7 @@ A modern Full Stack Restaurant Management & Food Ordering Platform developed dur
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens)
 
-![REST API](https://img.shields.io/badge/REST-API-009688?logo=fastapi&logoColor=white)
-![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)
-![Responsive](https://img.shields.io/badge/Responsive-Yes-28A745?logo=googlechrome&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Status](https://img.shields.io/badge/Status-Completed-success)
-</p>
-
+<p></center>
 ---
 
 # 📖 Overview
@@ -39,7 +32,7 @@ The final application **Savoria** combines all internship milestones into a prod
 
 # ✨ Main Features
 
-- 🍽️ Restaurant Website
+- 🛎️ Restaurant Website
 - 📋 Dynamic Food Menu
 - 🛒 Shopping Cart
 - 💳 Checkout System
