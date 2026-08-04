@@ -1,4 +1,6 @@
-![Savoria Banner](banner.svg)
+<p align="center">
+  <img src="banner.png" alt="Heart Disease Prediction Banner" width="100%">
+</p>
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
 
