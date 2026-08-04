@@ -42,7 +42,6 @@ DecodeLabs-Internship
 ├── project-3-database-integration
 ├── project-4-auth-authorization
 ├── full-stack-complete-app
-├── LICENSE
 └── README.md
 ```
 
