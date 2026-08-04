@@ -2,6 +2,14 @@
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
 
+![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
 ### 🍽️ Featured Project: Savoria – Fine Dining & Food Ordering Platform
 
 A complete collection of projects developed during the **DecodeLabs Full Stack Development Internship (Batch 2026)**.
