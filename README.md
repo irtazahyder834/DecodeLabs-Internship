@@ -8,17 +8,23 @@
 A modern Full Stack Restaurant Management & Food Ordering Platform developed during the
 <strong>DecodeLabs Full Stack Development Internship (Batch 2026)</strong>.
 </p>
-<center><p>
 
-![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens)
+<p align="center">
 
-<p></center>
----
+  <img src="https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white">
+  <img src="https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens">
+  <img src="https://img.shields.io/badge/REST-API-009688?logo=fastapi&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/Responsive-Mobile-green?logo=googlechrome&logoColor=white">
+  <img src="https://img.shields.io/badge/License-MIT-blue">
+  <img src="https://img.shields.io/badge/Status-Completed-success">
+
+</p>
 
 # 📖 Overview
 
