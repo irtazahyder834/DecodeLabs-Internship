@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="banner.png" alt="Savoria Fine Dining & Food Ordering Platform Banner" width="100%">
-</p>
+![Savoria Fine Dining & Food Ordering Platform Banner](banner.png)
 
 # 🚀 DecodeLabs Internship – Full Stack Development Projects
 
