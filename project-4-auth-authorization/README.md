@@ -1,4 +1,4 @@
-# 🍽️ Savoria — Project 4: Authentication & Authorization
+# 🛎️ Savoria — Project 4: Authentication & Authorization
 
 A **JWT-based authentication system with role-based access control (RBAC)** for Savoria, supporting three roles — `customer`, `staff`, and `admin` — built with plain PHP and a hand-rolled, dependency-free JWT (HS256) implementation.
 
