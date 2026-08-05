@@ -1,4 +1,4 @@
-# 🍽️ Savoria — Project 2: Backend API (JSON Storage)
+# 🛎️ Savoria — Project 2: Backend API (JSON Storage)
 
 A dependency-free **PHP REST API** for browsing the Savoria menu and placing orders — persisted to flat JSON files instead of a database. This project demonstrates clean routing, request validation, and server-side price integrity **before** the suite introduces MySQL in Project 3.
 
