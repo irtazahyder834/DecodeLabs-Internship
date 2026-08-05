@@ -1,4 +1,4 @@
-# 🍽️ Savoria — Project 3: Database Integration
+# 🛎️ Savoria — Project 3: Database Integration
 
 A **PHP + MySQL (PDO)** REST API layer for Savoria, replacing Project 2's JSON files with a proper relational schema — categories, menu items, orders, and order line items — all accessed through **prepared statements** and a **transactional order-creation flow**.
 
