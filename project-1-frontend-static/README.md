@@ -1,4 +1,4 @@
-# 🍽️ Savoria — Project 1: Static Frontend
+# 🛎️ Savoria — Project 1: Static Frontend
 
 A fully responsive, animated restaurant landing page for **Savoria**, a fine-dining and food-ordering brand. Built with pure **HTML5, CSS3, and vanilla JavaScript** — no frameworks, no build step.
 
