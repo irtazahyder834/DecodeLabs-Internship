@@ -1,4 +1,4 @@
-# 🍽️ Savoria — Full-Stack Complete App
+# 🛎️  Savoria — Full-Stack Complete App
 
 The complete, deployable Savoria application — combining the static frontend (Project 1), the ordering domain and MySQL integration (Project 3), and JWT authentication with RBAC (Project 4) into a single working restaurant platform.
 
